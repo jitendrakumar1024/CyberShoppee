@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -110,8 +111,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Search\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CyberShoppeeApi\CyberShoppeeApi.csproj">
+      <Project>{b3ea8225-5681-4545-9e8d-d53cd5f6d77e}</Project>
+      <Name>CyberShoppeeApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CyberShoppeeDataAccessLayer\CyberShoppeeDataAccessLayer.csproj">
+      <Project>{8bcd1d43-62a8-4c28-bad1-97e713dc6af0}</Project>
+      <Name>CyberShoppeeDataAccessLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

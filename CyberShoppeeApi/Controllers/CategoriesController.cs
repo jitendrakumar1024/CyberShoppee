@@ -15,7 +15,6 @@ namespace CyberShoppeeApi.Controllers
         private ICategoryRepository _categoryRepository = new CategoryRepository();
         [Route("")]
         public IHttpActionResult GetAllCategories()
-
         {
             try
             {
@@ -23,13 +22,8 @@ namespace CyberShoppeeApi.Controllers
             } 
             catch(CategoriesDataUnavailableException e) 
             { 
-
                 return BadRequest(e.Message);
-                }
-
-           
-            
-            
+            }
         }
         [Route("{id}")]
         public IHttpActionResult GetCategoryById(int id)
@@ -41,8 +35,18 @@ namespace CyberShoppeeApi.Controllers
             {
                 return BadRequest(e.Message);
             }
-
         }
-
+        [Route("name/{name}")]
+        public IHttpActionResult GetCategoryByName(string name)
+        {
+            try
+            {
+                return Ok(_categoryRepository.GetCategoryByName(name));
+            }
+            catch (CategoriesDataUnavailableException e)
+            {
+                return BadRequest(e.Message);
+            }
         }
+    }
 }
