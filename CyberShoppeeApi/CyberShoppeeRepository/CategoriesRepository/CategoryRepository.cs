@@ -21,15 +21,15 @@ namespace CyberShoppeeApi.CyberShoppeeRepository.CategoriesRepository
         }
 
 
-        public Category GetCategoryById(int id)
-        {
-            var category = context.Categories.Find(id);
-            if (category == null)
-            {
-                throw new CategoriesDataUnavailableException("No Categories Found");
-            }
-            return category;
-        }
+        //public IEnumerable<Category> GetCategoriesByProducts(int id)
+        //{
+        //    var products = context.Products.Where(c => c.CategoryId == id).ToList();
+        //    if (products == null)
+        //    {
+        //        throw new ProductDataUnavailableException("product not found");
+        //    }
+        //    return products;
+        //}
 
 
     }

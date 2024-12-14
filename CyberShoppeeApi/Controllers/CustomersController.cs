@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using CyberShoppeeApi.CyberShoppeeRepository;
 using CyberShoppeeApi.CyberShoppeeRepository.CustomersRepository;
+using CyberShoppeeDataAccessLayer.Entity;
 
 namespace CyberShoppeeApi.Controllers
 
@@ -38,6 +39,36 @@ namespace CyberShoppeeApi.Controllers
             {
                 return BadRequest(e.Message);
             }
+        }
+
+        [HttpPost]
+        [Route("Register")]
+
+        public IHttpActionResult RegisterCustomer(Customer customer)
+        {
+            try
+            {
+                return Ok(_customerRepository.Register(customer));
+            }
+            catch (CutomerDataUnavailableException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("AccountDelete/{id}")]
+        public IHttpActionResult DeleteCustomer(int id)
+        {
+            try
+            {
+                return Ok(_customerRepository.DeleteAccount(id));
+            }
+            catch(CutomerDataUnavailableException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 }

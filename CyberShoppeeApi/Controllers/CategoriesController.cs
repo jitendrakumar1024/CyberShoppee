@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using CyberShoppeeApi.CyberShoppeeRepository;
 using CyberShoppeeApi.CyberShoppeeRepository.CategoriesRepository;
+using CyberShoppeeDataAccessLayer.Entity;
 
 namespace CyberShoppeeApi.Controllers
 {
@@ -31,18 +32,7 @@ namespace CyberShoppeeApi.Controllers
             
             
         }
-        [Route("{id}")]
-        public IHttpActionResult GetCategoryById(int id)
-        {
-            try {
-                return Ok(_categoryRepository.GetCategoryById(id));
-            }
-            catch(CategoriesDataUnavailableException e)
-            {
-                return BadRequest(e.Message);
-            }
+       
 
-        }
-
-        }
+    }
 }

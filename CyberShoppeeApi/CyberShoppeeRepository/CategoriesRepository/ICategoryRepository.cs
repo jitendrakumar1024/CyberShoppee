@@ -9,6 +9,6 @@ namespace CyberShoppeeApi.CyberShoppeeRepository.CategoriesRepository
     public interface ICategoryRepository
     {
          IEnumerable<Category> GetAllCategories();
-         Category GetCategoryById(int id);
+        //IEnumerable<Category> GetCategoriesByProducts(int id);
     }
 }

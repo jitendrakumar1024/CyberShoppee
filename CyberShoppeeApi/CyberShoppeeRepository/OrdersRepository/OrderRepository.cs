@@ -20,7 +20,7 @@ namespace CyberShoppeeApi.CyberShoppeeRepository.OrdersRepository
         {
 
             var allOrders = context.Orders.ToList();
-            allOrders = null;
+           
             if (allOrders == null)
             {
                 throw new ProductDataUnavailableException("No Products Found");

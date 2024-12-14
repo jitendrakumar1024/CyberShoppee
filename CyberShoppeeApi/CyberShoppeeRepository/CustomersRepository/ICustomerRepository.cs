@@ -11,5 +11,9 @@ namespace CyberShoppeeApi.CyberShoppeeRepository.CustomersRepository
     {
          IEnumerable<Customer> GetAllCustomers();
         Customer GetCustomerById(int id);
+
+        string Register(Customer customer);
+
+        string DeleteAccount(int id);
     }
 }
