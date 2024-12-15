@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CyberShoppeeContext\CyberShoppeeContext.cs" />
+    <Compile Include="Entity\CartItemDto.cs" />
     <Compile Include="Entity\Category.cs" />
     <Compile Include="Entity\Customer.cs" />
     <Compile Include="Entity\Order.cs" />
