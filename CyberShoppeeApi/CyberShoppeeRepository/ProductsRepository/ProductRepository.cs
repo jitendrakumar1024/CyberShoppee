@@ -20,6 +20,15 @@ namespace CyberShoppeeApi.CyberShoppeeRepository.ProductsRepository
             return products;
         }
 
+        public IEnumerable<Product> getLatestProduct()
+        {
+            var products=cyberShoppeeContext.Products.OrderBy(r => Guid.NewGuid()).Take(10).ToList(); 
+            if (products == null)
+            {
+                throw new ProductDataUnavailableException("product not available");
+            }
+            return products;
+        }
 
         public IEnumerable<Product> getProductByCategoriesName(int id)
         {
