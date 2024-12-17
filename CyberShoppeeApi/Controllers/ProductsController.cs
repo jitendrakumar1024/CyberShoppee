@@ -14,7 +14,7 @@ namespace CyberShoppeeApi.Controllers
     [RoutePrefix("api/products")]
     public class ProductsController : ApiController
     {
-        private readonly IProductRepository _productRepository = new ProductRepository();
+        private  IProductRepository _productRepository = new ProductRepository();
 
         [Route("")]
 
@@ -74,12 +74,25 @@ namespace CyberShoppeeApi.Controllers
         }
 
         [HttpGet]
-        [Route("LatestProducts")]
+        [Route("TopProducts")]
         public IHttpActionResult GetLeatestProduct()
         {
             try
             {
                 return Ok(_productRepository.getTopProduct());
+            }
+            catch (ProductDataUnavailableException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("LatestProduct")]
+        public IHttpActionResult getTopProducts()
+        {
+            try
+            {
+                return Ok(_productRepository.getLatestProduct());
             }
             catch (ProductDataUnavailableException ex)
             {

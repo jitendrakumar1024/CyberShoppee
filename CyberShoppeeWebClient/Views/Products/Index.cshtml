@@ -1,0 +1,255 @@
+﻿@model CyberShoppeeWebClient.Models.ProductModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Cart</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <link href="~/Content/Styles.css" />
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .cart-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        /* Card Styling */
+        .card {
+            background: #ffffff;
+            color: #073b4c;
+            font-weight: 600;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            height: 100%;
+        }
+
+            .card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+        .card__image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .title {
+            font-weight: 800;
+            font-size: 1.4em;
+            color: #333;
+        }
+
+        .card__content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 10px;
+            flex-grow: 1;
+        }
+
+        .card .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        /* Add to Cart Button */
+        .card .btn {
+            background-color: #118ab2;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+            .card .btn:hover {
+                background-color: #0a6ea0;
+            }
+
+        /* Modal Styling */
+        .modal-body img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Responsive Grid */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .col-lg-3, .col-md-4, .col-sm-6, .col-12 {
+            flex: 1 1 22%;
+            margin-bottom: 20px;
+        }
+    </style>
+   
+</head>
+<body>
+    <div class="container cart-page">
+        <div class="cart-header">
+            <h1>Shop Our Products</h1>
+            <p>Browse our collection of amazing products. Add them to your cart with a click!</p>
+        </div>
+
+        <!-- Top 10 Products Section -->
+        <h2>Top  Products</h2>
+        <div class="row">
+            @foreach (var product in Model.Top10Products)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card__image">
+                            <img src="@product.img_url" alt="@product.ModelName" data-toggle="modal" data-target="#productModal@product.Id" />
+                        </div>
+                        <div class="card__content">
+                            <h4 class="title">@product.ModelName</h4>
+                            <p>@product.Description</p>
+                            <p class="price">@product.UnitCost.ToString("C")</p>
+                            <button class="btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Modal -->
+                <div class="modal fade" id="productModal@product.Id" tabindex="-1" role="dialog" aria-labelledby="productModalLabel@product.Id" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="productModalLabel@product.Id">@product.ModelName</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="@product.img_url" alt="@product.ModelName" />
+                                <p>@product.Description</p>
+                                <p class="price">@product.UnitCost.ToString("C")</p>
+                                <button class="btn btn-primary">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Mixed 10 Products Section -->
+        <h2>Latest Products</h2>
+        <div class="row">
+            @foreach (var product in Model.Mix10Products)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card__image">
+                            <img src="@product.img_url" alt="@product.ModelName" data-toggle="modal" data-target="#productModal@product.Id" />
+                        </div>
+                        <div class="card__content">
+                            <h4 class="title">@product.ModelName</h4>
+                            <p>@product.Description</p>
+                            <p class="price">@product.UnitCost.ToString("C")</p>
+                            <button class="btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Modal -->
+                <div class="modal fade" id="productModal@product.Id" tabindex="-1" role="dialog" aria-labelledby="productModalLabel@product.Id" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="productModalLabel@product.Id">@product.ModelName</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="@product.img_url" alt="@product.ModelName" />
+                                <p>@product.Description</p>
+                                <p class="price">@product.UnitCost.ToString("C")</p>
+                                <button class="btn btn-primary">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- All Products Section -->
+        <h2>All Products</h2>
+        <div class="row">
+            @foreach (var product in Model.AllProducts)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card__image">
+                            <img src="@product.img_url" alt="@product.ModelName" data-toggle="modal" data-target="#productModal@product.Id" />
+                        </div>
+                        <div class="card__content">
+                            <h4 class="title">@product.ModelName</h4>
+                            <p>@product.Description</p>
+                            <p class="price">@product.UnitCost.ToString("C")</p>
+                            <button class="btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Modal -->
+                <div class="modal fade" id="productModal@product.Id" tabindex="-1" role="dialog" aria-labelledby="productModalLabel@product.Id" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="productModalLabel@product.Id">@product.ModelName</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="@product.img_url" alt="@product.ModelName" />
+                                <p>@product.Description</p>
+                                <p class="price">@product.UnitCost.ToString("C")</p>
+                                <button class="btn btn-primary">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src=" https: //cdn.jsdelivr.net/npm/popperjs/core@2

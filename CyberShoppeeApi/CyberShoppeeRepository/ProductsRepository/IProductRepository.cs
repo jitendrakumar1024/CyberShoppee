@@ -18,6 +18,8 @@ namespace CyberShoppeeApi.CyberShoppeeRepository.ProductsRepository
 
         IEnumerable<Product> getTopProduct();
 
+        IEnumerable<Product> getLatestProduct();
+
         Product getProductById(int id);
     }
 }
