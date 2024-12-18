@@ -1,13 +1,113 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Error</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .floating-element {
+            position: absolute;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+        .error-container {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    </style>
 </head>
-<body>
-    <hgroup>
-        <h1>Error.</h1>
-        <h2>An error occurred while processing your request.</h2>
-    </hgroup>
+<body class="relative">
+    <div id="particles-js"></div>
+    <div class="error-container text-center p-12 rounded-lg max-w-md w-full relative z-10">
+        <div class="404-graphic mb-6">
+            <svg class="mx-auto" width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="90" stroke="white" stroke-width="10" stroke-dasharray="20 20"/>
+                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="120" font-weight="bold">404</text>
+            </svg>
+        </div>
+        <h1 class="text-3xl font-bold text-white mb-4">Oops! Page Not Found</h1>
+        <p class="text-white opacity-70 mb-6">The page you're looking for seems to have wandered off into the digital wilderness.</p>
+        <div class="space-y-4">
+            <button id="homeBtn" class="w-full py-3 bg-white text-purple-600 rounded-lg hover:bg-purple-100 transition duration-300">
+                Return to Home
+            </button>
+            <button id="refreshBtn" class="w-full py-3 border border-white text-white rounded-lg hover:bg-white hover:text-purple-600 transition duration-300">
+                Refresh Page
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Particle JS Configuration
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#ffffff' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: false },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: false,
+                    out_mode: 'out',
+                    bounce: false,
+                }
+            },
+            interactivity: { detect_on: 'canvas', events: { onhover: { enable: false } } },
+            retina_detect: true
+        });
+
+        // Button Event Listeners
+        document.getElementById('homeBtn').addEventListener('click', () => {
+            window.location.href = '/'; // Adjust to your home page URL
+        });
+
+        document.getElementById('refreshBtn').addEventListener('click', () => {
+            window.location.reload();
+        });
+
+        // Create floating elements
+        function createFloatingElement() {
+            const element = document.createElement('div');
+            element.classList.add('floating-element');
+            element.style.width = `${Math.random() * 50 + 20}px`;
+            element.style.height = element.style.width;
+            element.style.background = `rgba(255,255,255,${Math.random() * 0.3})`;
+            element.style.borderRadius = '50%';
+            element.style.left = `${Math.random() * 100}%`;
+            element.style.top = `${Math.random() * 100}%`;
+            document.body.appendChild(element);
+        }
+
+        // Create multiple floating elements
+        for (let i = 0; i < 10; i++) {
+            createFloatingElement();
+        }
+    </script>
 </body>
 </html>
